@@ -1,3 +1,4 @@
+/* eslint-disable n8n-nodes-base/node-class-description-icon-not-svg */
 import {
 	IDataObject,
 	IExecuteFunctions,
@@ -37,11 +38,11 @@ export class Memos implements INodeType {
 				default: 'memos',
 				options: [
 					{
-						name: 'Users',
+						name: 'User',
 						value: 'users',
 					},
 					{
-						name: 'Memos',
+						name: 'Memo',
 						value: 'memos',
 					},
 				],
@@ -56,12 +57,12 @@ export class Memos implements INodeType {
 					{
 						name: 'List Users',
 						value: 'listUsers',
-						description: 'return a list of users',
+						action: 'List users',
 					},
 					{
 						name: 'Get User',
 						value: 'getUser',
-						description: 'gets a user by name',
+						action: 'Get user',
 					},
 				],
 				displayOptions: {
@@ -80,12 +81,12 @@ export class Memos implements INodeType {
 					{
 						name: 'List Memos',
 						value: 'listMemos',
-						description: 'lists memos with pagination and filter.​',
+						action: 'List memos',
 					},
 					{
 						name: 'Get Memo',
 						value: 'getMemo',
-						description: 'gets a memo',
+						action: 'Get memo',
 					},
 				],
 				displayOptions: {
@@ -99,6 +100,7 @@ export class Memos implements INodeType {
 				name: 'name',
 				type: 'string',
 				default: '',
+				required: true,
 				hint: 'users/1 or memos/1',
 				displayOptions: {
 					show: {
