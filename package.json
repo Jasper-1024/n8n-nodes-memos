@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/laxtiz/n8n-nodes-memos.git"
+    "url": "git+https://github.com/laxtiz/n8n-nodes-memos.git"
   },
   "main": "index.js",
   "scripts": {
@@ -33,7 +33,8 @@
       "dist/credentials/MemosApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/Memos/Memos.node.js"
+      "dist/nodes/Memos/Memos.node.js",
+      "dist/nodes/Memos/MemosTrigger.node.js"
     ]
   },
   "devDependencies": {

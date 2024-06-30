@@ -1,5 +1,5 @@
 {
-	"node": "n8n-nodes-base.memos",
+	"node": "n8n-nodes-base.memosTrigger",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
 	"categories": ["Communication"],
@@ -11,7 +11,7 @@
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://www.usememos.com/docs"
+				"url": "https://www.usememos.com/docs/advanced-settings/webhook"
 			}
 		]
 	}
