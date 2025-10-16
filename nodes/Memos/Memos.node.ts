@@ -1,4 +1,5 @@
 /* eslint-disable n8n-nodes-base/node-class-description-icon-not-svg */
+/* eslint-disable n8n-nodes-base/node-class-description-icon-not-svg */
 import {
 	IDataObject,
 	IExecuteFunctions,
@@ -79,9 +80,14 @@ export class Memos implements INodeType {
 				default: 'listMemos',
 				options: [
 					{
-						name: 'List Memos',
-						value: 'listMemos',
-						action: 'List memos',
+						name: 'Create Memo',
+						value: 'createMemo',
+						action: 'Create memo',
+					},
+					{
+						name: 'Delete Memo',
+						value: 'deleteMemo',
+						action: 'Delete memo',
 					},
 					{
 						name: 'Get Memo',
@@ -89,19 +95,14 @@ export class Memos implements INodeType {
 						action: 'Get memo',
 					},
 					{
-						name: 'Create Memo',
-						value: 'createMemo',
-						action: 'Create memo',
+						name: 'List Memos',
+						value: 'listMemos',
+						action: 'List memos',
 					},
 					{
 						name: 'Update Memo',
 						value: 'updateMemo',
 						action: 'Update memo',
-					},
-					{
-						name: 'Delete Memo',
-						value: 'deleteMemo',
-						action: 'Delete memo',
 					},
 				],
 				displayOptions: {
