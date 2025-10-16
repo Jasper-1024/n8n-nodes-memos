@@ -2,7 +2,7 @@ import { AllEntities, PropertiesOf } from 'n8n-workflow';
 
 export type MemosMap = {
 	user: 'listUsers' | 'getUser';
-	memo: 'listMemos' | 'getMemo';
+	memo: 'listMemos' | 'getMemo' | 'createMemo' | 'updateMemo' | 'deleteMemo';
 };
 
 export type MemosAction = AllEntities<MemosMap>;
@@ -80,4 +80,24 @@ export interface WebhookPayload {
 	creatorId: number;
 	createTime: string;
 	memo: Memo;
+}
+
+export interface CreateMemoRequest {
+	content: string;
+	visibility?: Visibility;
+	resourceIdList?: number[];
+	relationList?: any[];
+}
+
+export interface UpdateMemoRequest {
+	id?: number;
+	creatorId?: number;
+	createdTs?: number;
+	updatedTs?: number;
+	rowStatus?: RowStatus;
+	content?: string;
+	visibility?: Visibility;
+	pinned?: boolean;
+	resourceIdList?: number[];
+	relationList?: any[];
 }

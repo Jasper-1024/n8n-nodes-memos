@@ -88,6 +88,21 @@ export class Memos implements INodeType {
 						value: 'getMemo',
 						action: 'Get memo',
 					},
+					{
+						name: 'Create Memo',
+						value: 'createMemo',
+						action: 'Create memo',
+					},
+					{
+						name: 'Update Memo',
+						value: 'updateMemo',
+						action: 'Update memo',
+					},
+					{
+						name: 'Delete Memo',
+						value: 'deleteMemo',
+						action: 'Delete memo',
+					},
 				],
 				displayOptions: {
 					show: {
@@ -104,9 +119,168 @@ export class Memos implements INodeType {
 				hint: 'users/1 or memos/1',
 				displayOptions: {
 					show: {
-						operation: ['getUser', 'getMemo'],
+						operation: ['getUser', 'getMemo', 'updateMemo', 'deleteMemo'],
 					},
 				},
+			},
+			// Create Memo fields
+			{
+				displayName: 'Content',
+				name: 'content',
+				type: 'string',
+				typeOptions: {
+					rows: 4,
+				},
+				default: '',
+				required: true,
+				description: 'The content of the memo',
+				displayOptions: {
+					show: {
+						operation: ['createMemo'],
+					},
+				},
+			},
+			{
+				displayName: 'Visibility',
+				name: 'visibility',
+				type: 'options',
+				options: [
+					{
+						name: 'Private',
+						value: 'PRIVATE',
+					},
+					{
+						name: 'Workspace',
+						value: 'WORKSPACE',
+					},
+					{
+						name: 'Public',
+						value: 'PUBLIC',
+					},
+				],
+				default: 'PRIVATE',
+				description: 'Visibility of the memo',
+				displayOptions: {
+					show: {
+						operation: ['createMemo'],
+					},
+				},
+			},
+			// Update Memo fields
+			{
+				displayName: 'Update Fields',
+				name: 'updateFields',
+				type: 'collection',
+				placeholder: 'Add Field',
+				default: {},
+				displayOptions: {
+					show: {
+						operation: ['updateMemo'],
+					},
+				},
+				options: [
+					{
+						displayName: 'Content',
+						name: 'content',
+						type: 'string',
+						typeOptions: {
+							rows: 4,
+						},
+						default: '',
+						description: 'The content of the memo',
+					},
+					{
+						displayName: 'Visibility',
+						name: 'visibility',
+						type: 'options',
+						options: [
+							{
+								name: 'Private',
+								value: 'PRIVATE',
+							},
+							{
+								name: 'Workspace',
+								value: 'WORKSPACE',
+							},
+							{
+								name: 'Public',
+								value: 'PUBLIC',
+							},
+						],
+						default: 'PRIVATE',
+						description: 'Visibility of the memo',
+					},
+					{
+						displayName: 'Pinned',
+						name: 'pinned',
+						type: 'boolean',
+						default: false,
+						description: 'Whether the memo is pinned',
+					},
+					{
+						displayName: 'Row Status',
+						name: 'rowStatus',
+						type: 'options',
+						options: [
+							{
+								name: 'Active',
+								value: 'ACTIVE',
+							},
+							{
+								name: 'Archived',
+								value: 'ARCHIVED',
+							},
+						],
+						default: 'ACTIVE',
+						description: 'Status of the memo',
+					},
+				],
+			},
+			// List Memos filters
+			{
+				displayName: 'Filters',
+				name: 'filters',
+				type: 'collection',
+				placeholder: 'Add Filter',
+				default: {},
+				displayOptions: {
+					show: {
+						operation: ['listMemos'],
+					},
+				},
+				options: [
+					{
+						displayName: 'Tag',
+						name: 'tag',
+						type: 'string',
+						default: '',
+						description: 'Filter by tag (without # symbol)',
+					},
+					{
+						displayName: 'Row Status',
+						name: 'rowStatus',
+						type: 'options',
+						options: [
+							{
+								name: 'Normal',
+								value: 'NORMAL',
+							},
+							{
+								name: 'Archived',
+								value: 'ARCHIVED',
+							},
+						],
+						default: 'NORMAL',
+						description: 'Filter by memo status',
+					},
+					{
+						displayName: 'Content Search',
+						name: 'content',
+						type: 'string',
+						default: '',
+						description: 'Search for keywords in memo content',
+					},
+				],
 			},
 		],
 	};
@@ -127,12 +301,42 @@ export class Memos implements INodeType {
 					break;
 
 				case 'listMemos':
-					data = await apiRequest.call(this, 'GET', 'memos');
+					const filters = this.getNodeParameter('filters', index, {}) as IDataObject;
+					// Build query parameters from filters
+					const queryParams: IDataObject = {};
+					if (filters.tag) queryParams.tag = filters.tag;
+					if (filters.rowStatus) queryParams.rowStatus = filters.rowStatus;
+					if (filters.content) queryParams.content = filters.content;
+					data = await apiRequest.call(this, 'GET', 'memos', undefined, queryParams);
 					break;
+
 				case 'getUser':
 				case 'getMemo':
 					const name = this.getNodeParameter('name', index) as string;
 					data = await apiRequest.call(this, 'GET', name);
+					break;
+
+				case 'createMemo':
+					const content = this.getNodeParameter('content', index) as string;
+					const visibility = this.getNodeParameter('visibility', index) as string;
+					const createBody = {
+						content,
+						visibility,
+					};
+					data = await apiRequest.call(this, 'POST', 'memo', createBody);
+					break;
+
+				case 'updateMemo':
+					const memoName = this.getNodeParameter('name', index) as string;
+					const updateFields = this.getNodeParameter('updateFields', index) as IDataObject;
+					data = await apiRequest.call(this, 'PATCH', memoName, updateFields);
+					break;
+
+				case 'deleteMemo':
+					const deleteName = this.getNodeParameter('name', index) as string;
+					// Extract memo ID from name format "memos/123"
+					const memoId = deleteName.split('/')[1];
+					data = await apiRequest.call(this, 'DELETE', `memo/${memoId}`);
 					break;
 			}
 
