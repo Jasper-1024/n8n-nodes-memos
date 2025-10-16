@@ -117,7 +117,7 @@ export class Memos implements INodeType {
 				type: 'string',
 				default: '',
 				required: true,
-				hint: 'users/1 or memos/1',
+				hint: 'users/1 or memo/1',
 				displayOptions: {
 					show: {
 						operation: ['getUser', 'getMemo', 'updateMemo', 'deleteMemo'],
@@ -308,7 +308,7 @@ export class Memos implements INodeType {
 					if (filters.tag) queryParams.tag = filters.tag;
 					if (filters.rowStatus) queryParams.rowStatus = filters.rowStatus;
 					if (filters.content) queryParams.content = filters.content;
-					data = await apiRequest.call(this, 'GET', 'memos', undefined, queryParams);
+					data = await apiRequest.call(this, 'GET', 'memo', undefined, queryParams);
 					break;
 
 				case 'getUser':
