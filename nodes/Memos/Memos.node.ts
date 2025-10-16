@@ -308,7 +308,7 @@ export class Memos implements INodeType {
 					if (filters.tag) queryParams.tag = filters.tag;
 					if (filters.rowStatus) queryParams.rowStatus = filters.rowStatus;
 					if (filters.content) queryParams.content = filters.content;
-					data = await apiRequest.call(this, 'GET', 'memo', undefined, queryParams);
+					data = await apiRequest.call(this, 'GET', 'memos', undefined, queryParams);
 					break;
 
 				case 'getUser':
@@ -324,7 +324,7 @@ export class Memos implements INodeType {
 						content,
 						visibility,
 					};
-					data = await apiRequest.call(this, 'POST', 'memo', createBody);
+					data = await apiRequest.call(this, 'POST', 'memos', createBody);
 					break;
 
 				case 'updateMemo':
@@ -337,7 +337,7 @@ export class Memos implements INodeType {
 					const deleteName = this.getNodeParameter('name', index) as string;
 					// Extract memo ID from name format "memos/123"
 					const memoId = deleteName.split('/')[1];
-					data = await apiRequest.call(this, 'DELETE', `memo/${memoId}`);
+					data = await apiRequest.call(this, 'DELETE', `memos/${memoId}`);
 					break;
 			}
 
