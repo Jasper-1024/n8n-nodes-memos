@@ -1,29 +1,48 @@
-# n8n-nodes-memos
+# n8n-nodes-memos-plus
 
-This is an n8n community node. It lets you use Memos in your n8n workflows.
+This is an enhanced n8n community node for Memos with full CRUD operations and filtering support.
+
+> **Note**: This is a fork of [n8n-nodes-memos](https://github.com/laxtiz/n8n-nodes-memos) with additional features.
 
 [Memos](https://www.usememos.com/) is a privacy-first, lightweight note-taking service.
 
 [n8n](https://n8n.io/) is a [fair-code licensed](https://docs.n8n.io/reference/license/) workflow automation platform.
 
-[Installation](#installation)  
-[Operations](#operations)  
-[Credentials](#credentials) <!-- delete if no auth needed -->  
-[Compatibility](#compatibility)  
-[Usage](#usage) <!-- delete if not using this section -->  
-[Resources](#resources)  
-[Version history](#version-history) <!-- delete if not using this section -->
+[Installation](#installation)
+[Operations](#operations)
+[Credentials](#credentials)
+[Compatibility](#compatibility)
+[Usage](#usage)
+[Resources](#resources)
+[Version history](#version-history)
 
 ## Installation
 
-Follow the [installation guide](https://docs.n8n.io/integrations/community-nodes/installation/) in the n8n community nodes documentation.
+### Community Nodes (Recommended)
+
+1. Go to **Settings > Community Nodes**
+2. Click **Install**
+3. Enter `n8n-nodes-memos-plus`
+4. Click **Install**
+
+### Manual Installation
+
+```bash
+npm install n8n-nodes-memos-plus
+```
 
 ## Operations
 
-- listUsers
-- getUser
-- listMemos
-- getMemo
+### Memo Operations
+- **List Memos** - List all memos with optional filters (tag, status, content search)
+- **Get Memo** - Get a single memo by ID
+- **Create Memo** - Create a new memo with content and visibility
+- **Update Memo** - Update an existing memo
+- **Delete Memo** - Delete a memo
+
+### User Operations
+- **List Users** - List all users
+- **Get User** - Get a single user
 
 ## Credentials
 
