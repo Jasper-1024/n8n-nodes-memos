@@ -1,19 +1,21 @@
 {
-  "name": "n8n-nodes-memos",
-  "version": "0.2.0",
-  "description": "Memos node for n8n workflow",
+  "name": "n8n-nodes-memos-plus",
+  "version": "0.3.0",
+  "description": "Enhanced Memos node for n8n workflow with full CRUD operations and filtering support",
   "keywords": [
-    "n8n-community-node-package"
+    "n8n-community-node-package",
+    "memos",
+    "usememos"
   ],
   "license": "MIT",
-  "homepage": "https://github.com/laxtiz/n8n-nodes-memos",
+  "homepage": "https://github.com/Jasper-1024/n8n-nodes-memos",
   "author": {
-    "name": "Zhong Liu",
-    "email": "laxtiz@live.com"
+    "name": "Jasper",
+    "email": "jasper@example.com"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/laxtiz/n8n-nodes-memos.git"
+    "url": "git+https://github.com/Jasper-1024/n8n-nodes-memos.git"
   },
   "main": "index.js",
   "scripts": {
