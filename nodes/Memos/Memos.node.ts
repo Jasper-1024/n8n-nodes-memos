@@ -337,7 +337,13 @@ export class Memos implements INodeType {
 					const deleteName = this.getNodeParameter('name', index) as string;
 					// Extract memo ID from name format "memos/123"
 					const memoId = deleteName.split('/')[1];
-					data = await apiRequest.call(this, 'DELETE', `memos/${memoId}`);
+					await apiRequest.call(this, 'DELETE', `memos/${memoId}`);
+					// Construct success response
+					data = {
+						success: true,
+						deleted: deleteName,
+						message: 'Memo deleted successfully',
+					};
 					break;
 			}
 

@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-memos-plus",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Enhanced Memos node for n8n workflow with full CRUD operations and filtering support",
   "keywords": [
     "n8n-community-node-package",
